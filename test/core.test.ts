@@ -154,7 +154,43 @@ describe('Trie', () => {
         });
     });
 
-    /*describe('Print', () => {
+    describe('findLeavesCount()', () => {
+
+        test('Leaves count in empty trie', () => {
+            const _trie = trie();
+            expect(_trie.getLeavesCount()).toEqual(0);
+        });
+
+        test('Leaves count in abc, abd', () => {
+            const _trie = trie(['abc', 'abd']);
+            expect(_trie.getLeavesCount()).toEqual(2);
+        });
+
+        test('Leaves count in answer, any', () => {
+            const _trie = trie(['answer', 'any']);
+            expect(_trie.getLeavesCount()).toEqual(2);
+        });
+    });
+
+    describe('getHeight()', () => {
+
+        test('getHeight() in empty trie', () => {
+            const _trie = trie();
+            expect(_trie.getHeight()).toEqual(0);
+        });
+
+        test('getHeight() in abc, abd', () => {
+            const _trie = trie(['abc', 'abd']);
+            expect(_trie.getHeight()).toEqual(3);
+        });
+
+        test('getHeight() in answer, any', () => {
+            const _trie = trie(['answer', 'any']);
+            expect(_trie.getHeight()).toEqual(6);
+        });
+    });
+
+    describe('Print', () => {
 
         test('Print empty trie', () => {
             const _trie = trie();
@@ -180,6 +216,6 @@ describe('Trie', () => {
             const _trie = trie(['answer', 'any', 'bye', 'their', 'there']);
             expect(_trie.printTrie()).toEqual('a b');
         });
-    });*/
+    });
 });
 

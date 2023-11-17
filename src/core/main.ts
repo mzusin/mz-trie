@@ -120,6 +120,97 @@ export const trie = (keys?: string[]) : ITrie => {
         return words;
     };
 
+    const getLeavesCount = (node?: INode) : number => {
+        const traverse = (node?: INode) : number => {
+            if(!node) return 0;
+
+            let count = 0;
+
+            if(node.isEndOfWord){
+                count++;
+            }
+
+            for(const child of node.children.values()) {
+                count += getLeavesCount(child);
+            }
+
+            return count;
+        };
+
+        return traverse(node ?? root);
+    };
+
+    const getHeight = (node?: INode) : number => {
+        let maxLevel = 0;
+
+        const traverse = (node: INode, level: number) => {
+            maxLevel = Math.max(maxLevel, level);
+
+            for(const child of node.children.values()) {
+                traverse(child, level + 1);
+            }
+        };
+
+        traverse(node ?? root, 0);
+
+        return maxLevel;
+    };
+
+    const printTrie = () : string => {
+
+        if(root.children.size <= 0) return '';
+
+        const rowsCount = getHeight(root);
+
+        const colWidthList: number[] = [];
+        let c=0;
+        for(const child of root.children.values()) {
+            colWidthList[c] = getLeavesCount(child);
+            c++;
+        }
+
+        const resultTbl: string[][] = [];
+        for(let r=0; r<rowsCount; r++) {
+            resultTbl.push([]);
+        }
+
+        const getCol = (c: number) => {
+            let shift = 0;
+            for(let i=0; i<c; i++) {
+                shift += colWidthList[i];
+            }
+            return shift;
+        };
+
+        const traverse = (node: INode, level: number, col: number, kidShift: number) => {
+            let t = 0;
+            const shift = getCol(col);
+            for(const [letter, kid] of node.children) {
+                resultTbl[level][shift + kidShift + t] = letter;
+                traverse(kid, level + 1, col, kidShift + t);
+                t++;
+            }
+        };
+
+        c = 0;
+        for(const [letter, child] of root.children) {
+            resultTbl[0][getCol(c)] = letter;
+            traverse(child, 1, c, 0);
+            c++;
+        }
+
+        let tree = '';
+        for(let r=0; r<resultTbl.length; r++) {
+            const row = resultTbl[r];
+            for(let c=0; c<row.length; c++) {
+                tree += (row[c] ?? ' ') + ' ';
+            }
+            tree += '\n';
+        }
+
+        return tree.trim();
+    };
+
     /**
      * Entry point
      */
@@ -137,7 +228,11 @@ export const trie = (keys?: string[]) : ITrie => {
         search,
         isEmpty,
 
+        getLeavesCount,
+        getHeight,
+
         logTree,
         getWords,
+        printTrie,
     };
 };

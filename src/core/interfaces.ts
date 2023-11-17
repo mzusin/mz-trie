@@ -1,8 +1,5 @@
 export interface INode {
-
     children: Map<string, INode>;
-
-    // isEndOfWord represents end of a word
     isEndOfWord: boolean;
 }
 
@@ -11,7 +8,11 @@ export interface ITrie {
     remove: (key: string) => void;
     search: (key: string) => boolean;
     isEmpty: (node?: INode) => boolean;
-    //printTrie: () => string;
+
+    getLeavesCount: (node?: INode) => number;
+    getHeight: (node?: INode) => number;
+
+    printTrie: () => string;
     logTree: () => string;
     getWords: () => string[];
 }

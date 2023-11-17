@@ -1,7 +1,10 @@
 # Trie
 
-Typescript implementation of trie/digital tree/radix tree/prefix tree/suffix tree.
+Typescript implementation of trie/digital tree/radix tree/prefix tree/suffix tree. 
 
-## Usage
-This data structure is used to store a dynamic set or associative array where the keys are usually strings.
-For example dictionary, such as one found on a mobile telephone for autocompletion and spell-checking.
+![](docs/trie.png)
+
+## Definition
+**Trie** (derived from re**trie**val) is a type of k-ary **search tree** used for storing and searching a specific string from a set. It is used to store a large amount of strings. The **pattern matching** can be done efficiently using tries. For example dictionary, such as one found on a mobile phone for autocompletion and spell-checking.
+
+Using trie, the key can be searched in **O(M)** time, where M is the **maximum string length**. However, the penalty is the storage requirements.

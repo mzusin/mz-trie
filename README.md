@@ -38,7 +38,7 @@ export const trie: (keys?: string[]) => ITrie;
 ```ts
 const _trie = trie(['orange', 'apple']);
 
-console.log(_trie.search('orange'));
+console.log(_trie.search('orange')); // true or false
 
 _trie.insert('potato');
 _trie.remove('potato');

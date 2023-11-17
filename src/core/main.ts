@@ -41,9 +41,13 @@ export const trie = (keys?: string[]) : ITrie => {
      */
     const remove = (key: string) => {
 
+        // The function returns true if this was the last child
+        // and the children array is empty.
         const traverse = (node: INode|undefined, depth: number) : boolean => {
             if(!node) return false;
 
+            // If it's a last character in the key,
+            // and the node is marked as the end of the word:
             if (depth === key.length && node.isEndOfWord) {
                 node.isEndOfWord = false;
                 return node.children.size === 0;

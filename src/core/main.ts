@@ -1,8 +1,5 @@
 import { INode, ITrie } from './interfaces';
 
-/**
- * Space: O(ALPHABET_SIZE * key_length * N) where N is the number of keys in Trie.
- */
 export const trie = (keys?: string[]) : ITrie => {
 
     const root: INode = {
@@ -12,7 +9,8 @@ export const trie = (keys?: string[]) : ITrie => {
 
     /**
      * Every character of the input key is inserted as an individual Trie node.
-     * Time: O(key_length)
+     * Time Complexity: O(key_length)
+     * Space Complexity: O(ALPHABET_SIZE * key_length * N) where N is the number of keys in Trie.
      */
     const insert = (key: string) => {
 
@@ -35,7 +33,39 @@ export const trie = (keys?: string[]) : ITrie => {
     };
 
     /**
-     * Time: O(key_length)
+     * Delete the key in bottom up manner using recursion.
+     * - Key may not be there in trie. Delete operation should not modify trie.
+     * - Key present as unique key (no part of key contains another key (prefix), nor the key itself is prefix of another key in trie). Delete all the nodes.
+     * - Key is prefix key of another long key in trie. Unmark the leaf node.
+     * - Key present in trie, having at least one other key as prefix key. Delete nodes from end of key until first leaf node of longest prefix key.
+     */
+    const remove = (key: string) => {
+
+        const traverse = (node: INode|undefined, depth: number) : boolean => {
+            if(!node) return false;
+
+            if (depth === key.length && node.isEndOfWord) {
+                node.isEndOfWord = false;
+                return node.children.size === 0;
+            }
+
+            const letter = key[depth];
+            const child = node.children.get(letter)
+
+            if (traverse(child, depth + 1)) {
+                node.children.delete(letter);
+                return node.children.size === 0;
+            }
+
+            return false;
+        };
+
+        traverse(root, 0);
+    };
+
+    /**
+     * Time Complexity: O(key_length)
+     * Space Complexity: O(1)
      */
     const search = (key: string) : boolean => {
         let node = root;
@@ -48,6 +78,21 @@ export const trie = (keys?: string[]) : ITrie => {
         }
 
         return node.isEndOfWord;
+    };
+
+    const isEmpty = (node?: INode) : boolean => {
+        node = node || root;
+        return node?.children.size <= 0;
+    };
+
+    const printTrie = () => {
+        return JSON.stringify(root, (_key, value) => {
+            if(value instanceof Map) {
+                return [...value];
+            }
+
+            return value;
+        }, 4);
     };
 
     /**
@@ -63,6 +108,9 @@ export const trie = (keys?: string[]) : ITrie => {
 
     return {
         insert,
+        remove,
         search,
+        isEmpty,
+        printTrie,
     };
 };

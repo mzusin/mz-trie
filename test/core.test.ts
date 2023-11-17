@@ -2,43 +2,130 @@ import { trie } from '../src/core/main';
 
 describe('Trie', () => {
 
-    test('insert and search for a key that exists', () => {
-        const _trie = trie();
-        _trie.insert('apple');
-        expect(_trie.search('apple')).toBeTruthy();
+    describe('Init', () => {
+        test('Init the trie with multiple values', () => {
+            const _trie = trie(['orange', 'apple']);
+            expect(_trie.search('orange')).toBeTruthy();
+            expect(_trie.search('apple')).toBeTruthy();
+            expect(_trie.search('grape')).toBeFalsy();
+        });
     });
 
-    test('search for a key that does not exist', () => {
-        const _trie = trie();
-        _trie.insert('apple');
-        expect(_trie.search('orange')).toBeFalsy();
+    describe('Insert & Search', () => {
+
+        test('insert and search for a key that exists', () => {
+            const _trie = trie();
+            _trie.insert('apple');
+            expect(_trie.search('apple')).toBeTruthy();
+        });
+
+        test('search for a key that does not exist', () => {
+            const _trie = trie();
+            _trie.insert('apple');
+            expect(_trie.search('orange')).toBeFalsy();
+        });
+
+        test('insert and search for a key with common prefix', () => {
+            const _trie = trie();
+            _trie.insert('apple');
+            _trie.insert('app');
+            expect(_trie.search('app')).toBeTruthy();
+            expect(_trie.search('apple')).toBeTruthy();
+        });
+
+        test('search for a key with a common prefix that does not exist', () => {
+            const _trie = trie();
+            _trie.insert('apple');
+            _trie.insert('app');
+            expect(_trie.search('appl')).toBeFalsy();
+        });
+
+        test('search for an empty key', () => {
+            const _trie = trie();
+            _trie.insert('apple');
+            _trie.insert('app');
+            expect(_trie.search('')).toBeFalsy();
+        });
+
+        test('search for a key in an empty trie', () => {
+            const _trie = trie();
+            expect(_trie.search('apple')).toBeFalsy();
+        });
+
+        test('trie is empty', () => {
+            const _trie = trie();
+            expect(_trie.isEmpty()).toBeTruthy();
+        });
+
+        test('trie is not empty', () => {
+            const _trie = trie();
+            _trie.insert('apple');
+            _trie.insert('app');
+            expect(_trie.isEmpty()).toBeFalsy();
+        });
+
+        test('insert twice', () => {
+            const _trie = trie();
+            _trie.insert('apple');
+            _trie.insert('apple');
+            expect(_trie.search('apple')).toBeTruthy();
+        });
     });
 
-    test('insert and search for a key with common prefix', () => {
-        const _trie = trie();
-        _trie.insert('apple');
-        _trie.insert('app');
-        expect(_trie.search('app')).toBeTruthy();
-        expect(_trie.search('apple')).toBeTruthy();
-    });
+    describe('Remove', () => {
 
-    test('search for a key with a common prefix that does not exist', () => {
-        const _trie = trie();
-        _trie.insert('apple');
-        _trie.insert('app');
-        expect(_trie.search('appl')).toBeFalsy();
-    });
+        // Key may not be there in trie. Delete operation should not modify trie.
+        test('delete a key in an empty', () => {
+            const _trie = trie();
+            _trie.remove('app');
+            expect(_trie.search('app')).toBeFalsy();
+        });
 
-    test('search for an empty key', () => {
-        const _trie = trie();
-        _trie.insert('apple');
-        _trie.insert('app');
-        expect(_trie.search('')).toBeFalsy();
-    });
+        test('delete a key that doesn\'t exist', () => {
+            const _trie = trie();
+            _trie.insert('apple');
+            _trie.remove('orange')
+            expect(_trie.search('orange')).toBeFalsy();
+            expect(_trie.search('apple')).toBeTruthy();
+        });
 
-    test('search for a key in an empty trie', () => {
-        const _trie = trie();
-        expect(_trie.search('apple')).toBeFalsy();
+        test('delete a key that exists', () => {
+            const _trie = trie();
+            _trie.insert('apple');
+            _trie.insert('orange');
+            _trie.remove('apple')
+            expect(_trie.search('apple')).toBeFalsy();
+            expect(_trie.search('app')).toBeFalsy();
+            expect(_trie.search('a')).toBeFalsy();
+            expect(_trie.search('orange')).toBeTruthy();
+        });
+
+        test('Key is prefix key of another long key in trie.', () => {
+            const _trie = trie();
+            _trie.insert('abcde');
+            _trie.insert('cd');
+            _trie.remove('cd')
+            expect(_trie.search('abcde')).toBeTruthy();
+            expect(_trie.search('cd')).toBeFalsy();
+        });
+
+        test('Key is con contain other keys.', () => {
+            const _trie = trie();
+            _trie.insert('abcde');
+            _trie.insert('cd');
+            _trie.remove('abcde')
+            expect(_trie.search('abcde')).toBeFalsy();
+            expect(_trie.search('cd')).toBeTruthy();
+        });
+
+        test('Key is prefix of another key', () => {
+            const _trie = trie();
+            _trie.insert('abc');
+            _trie.insert('abd');
+            _trie.remove('abc')
+            expect(_trie.search('abc')).toBeFalsy();
+            expect(_trie.search('abd')).toBeTruthy();
+        });
     });
 });
 

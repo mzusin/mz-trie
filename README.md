@@ -14,3 +14,36 @@ Typescript implementation of trie/digital tree/radix tree/prefix tree/suffix tre
 - Autocompletion.
 - The longest prefix.
 - Spell-checking software.
+
+## Interfaces
+
+```ts
+export interface INode {
+    children: Map<string, INode>;
+    isEndOfWord: boolean;
+}
+export interface ITrie {
+    insert: (key: string) => void;
+    remove: (key: string) => void;
+    search: (key: string) => boolean;
+    isEmpty: (node?: INode) => boolean;
+    printTrie: () => string;
+}
+
+export const trie: (keys?: string[]) => ITrie;
+```
+
+## Documentation
+
+```ts
+const _trie = trie(['orange', 'apple']);
+
+console.log(_trie.search('orange'));
+
+_trie.insert('potato');
+_trie.remove('potato');
+
+console.log(_trie.printTrie());
+```
+
+

@@ -8,5 +8,8 @@ export interface INode {
 
 export interface ITrie {
     insert: (key: string) => void;
+    remove: (key: string) => void;
     search: (key: string) => boolean;
+    isEmpty: (node?: INode) => boolean;
+    printTrie: () => string;
 }

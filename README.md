@@ -27,7 +27,8 @@ export interface ITrie {
     remove: (key: string) => void;
     search: (key: string) => boolean;
     isEmpty: (node?: INode) => boolean;
-    printTrie: () => string;
+    logTree: () => string;
+    getWords: () => string[];
 }
 
 export const trie: (keys?: string[]) => ITrie;
@@ -43,7 +44,8 @@ console.log(_trie.search('orange')); // true or false
 _trie.insert('potato');
 _trie.remove('potato');
 
-console.log(_trie.printTrie());
+console.log(_trie.logTree());
+console.log(_trie.getWords()); // ['orange', 'apple']
 ```
 
 

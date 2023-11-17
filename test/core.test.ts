@@ -127,5 +127,59 @@ describe('Trie', () => {
             expect(_trie.search('abd')).toBeTruthy();
         });
     });
+
+    describe('Get Words', () => {
+
+        test('Get empty trie words', () => {
+            const _trie = trie();
+            expect(_trie.getWords()).toEqual([]);
+        });
+
+        test('Get trie words: apple, oranges', () => {
+            const words = ['apple', 'oranges'];
+            const _trie = trie(words);
+            expect(_trie.getWords().sort()).toEqual(words.sort());
+        });
+
+        test('Get trie words: abcde, abcdef, ab, cd, cde', () => {
+            const words = ['abcde', 'abcdef', 'ab', 'cd', 'cde'];
+            const _trie = trie(words);
+            expect(_trie.getWords().sort()).toEqual(words.sort());
+        });
+
+        test('Get trie words: abc, abd', () => {
+            const words = ['abcde', 'abd'];
+            const _trie = trie(words);
+            expect(_trie.getWords().sort()).toEqual(words.sort());
+        });
+    });
+
+    /*describe('Print', () => {
+
+        test('Print empty trie', () => {
+            const _trie = trie();
+            expect(_trie.printTrie()).toEqual('');
+        });
+
+        test('Print a', () => {
+            const _trie = trie(['a']);
+            expect(_trie.printTrie()).toEqual('a');
+        });
+
+        test('Print a, b', () => {
+            const _trie = trie(['a', 'b']);
+            expect(_trie.printTrie()).toEqual('a b');
+        });
+
+        test('Print ab, ac', () => {
+            const _trie = trie(['ab', 'ac']);
+            expect(_trie.printTrie()).toEqual('a b');
+        });
+
+        test('Print 1', () => {
+            const _trie = trie(['answer', 'any', 'bye', 'their', 'there']);
+            expect(_trie.printTrie()).toEqual('a b');
+        });
+    });*/
 });
 

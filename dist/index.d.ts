@@ -9,7 +9,8 @@ declare module 'mz-trie' {
         remove: (key: string) => void;
         search: (key: string) => boolean;
         isEmpty: (node?: INode) => boolean;
-        printTrie: () => string;
+        logTree: () => string;
+        getWords: () => string[];
     }
 
     export const trie: (keys?: string[]) => ITrie;

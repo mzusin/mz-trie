@@ -11,5 +11,7 @@ export interface ITrie {
     remove: (key: string) => void;
     search: (key: string) => boolean;
     isEmpty: (node?: INode) => boolean;
-    printTrie: () => string;
+    //printTrie: () => string;
+    logTree: () => string;
+    getWords: () => string[];
 }

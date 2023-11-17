@@ -89,7 +89,7 @@ export const trie = (keys?: string[]) : ITrie => {
         return node?.children.size <= 0;
     };
 
-    const printTrie = () => {
+    const logTree = () => {
         return JSON.stringify(root, (_key, value) => {
             if(value instanceof Map) {
                 return [...value];
@@ -97,6 +97,27 @@ export const trie = (keys?: string[]) : ITrie => {
 
             return value;
         }, 4);
+    };
+
+    const getWords = () : string[] => {
+
+        const words: string[] = [];
+
+        const traverse = (node: INode, level: number, strArray: string[]) => {
+
+            if(node.isEndOfWord) {
+                words.push(strArray.slice(0, level).join(''));
+            }
+
+            for(const [letter, child] of node.children) {
+                strArray[level] = letter;
+                traverse(child, level + 1, strArray);
+            }
+        };
+
+        traverse(root, 0, []);
+
+        return words;
     };
 
     /**
@@ -115,6 +136,8 @@ export const trie = (keys?: string[]) : ITrie => {
         remove,
         search,
         isEmpty,
-        printTrie,
+
+        logTree,
+        getWords,
     };
 };

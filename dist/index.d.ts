@@ -9,6 +9,9 @@ declare module 'mz-trie' {
         remove: (key: string) => void;
         search: (key: string) => boolean;
         isEmpty: (node?: INode) => boolean;
+        getLeavesCount: (node?: INode) => number;
+        getHeight: (node?: INode) => number;
+        printTrie: () => string;
         logTree: () => string;
         getWords: () => string[];
     }

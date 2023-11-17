@@ -169,7 +169,7 @@ export const trie = (keys?: string[]) : ITrie => {
             c++;
         }
 
-        const resultTbl: string[][] = [];
+        const resultTbl: (string|undefined)[][] = [];
         for(let r=0; r<rowsCount; r++) {
             resultTbl.push([]);
         }
@@ -204,6 +204,21 @@ export const trie = (keys?: string[]) : ITrie => {
             const row = resultTbl[r];
             for(let c=0; c<row.length; c++) {
                 tree += (row[c] ?? ' ') + ' ';
+            }
+            tree += '\n';
+
+            for(let c=0; c<row.length; c++) {
+                if(row[c] === undefined || !resultTbl[r + 1] || resultTbl[r + 1][c] === undefined) {
+                    tree += '  ';
+                }
+                else{
+                    if(row[c + 1] === undefined && resultTbl[r + 1] && resultTbl[r + 1][c + 1] !== undefined) {
+                        tree += '|\\';
+                    }
+                    else{
+                        tree += '| ';
+                    }
+                }
             }
             tree += '\n';
         }

@@ -27,6 +27,9 @@ export interface ITrie {
     remove: (key: string) => void;
     search: (key: string) => boolean;
     isEmpty: (node?: INode) => boolean;
+    getLeavesCount: (node?: INode) => number;
+    getHeight: (node?: INode) => number;
+    printTrie: () => string;
     logTree: () => string;
     getWords: () => string[];
 }
@@ -46,6 +49,7 @@ _trie.remove('potato');
 
 console.log(_trie.logTree());
 console.log(_trie.getWords()); // ['orange', 'apple']
+console.log(_trie.printTrie());
 ```
 
 

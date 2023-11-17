@@ -209,12 +209,24 @@ describe('Trie', () => {
 
         test('Print ab, ac', () => {
             const _trie = trie(['ab', 'ac']);
-            expect(_trie.printTrie()).toEqual('a b');
+            expect(_trie.printTrie()).toEqual(`a 
+|\\
+b c`);
         });
 
         test('Print 1', () => {
             const _trie = trie(['answer', 'any', 'bye', 'their', 'there']);
-            expect(_trie.printTrie()).toEqual('a b');
+            expect(_trie.printTrie()).toEqual(`a   b t 
+|   | | 
+n   y h 
+|\\  | | 
+s y e e 
+|     |\\
+w     i r 
+|     | | 
+e     r e 
+|         
+r`);
         });
     });
 });

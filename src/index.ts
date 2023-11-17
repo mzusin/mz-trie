@@ -1,4 +1,4 @@
-import { trie } from './core';
+import { trie } from './core/main';
 
 const api = {
     ...trie,
@@ -12,4 +12,4 @@ declare global {
 
 window.mzTrie = window.mzTrie || api;
 
-export * from './core';
+export * from './core/main';

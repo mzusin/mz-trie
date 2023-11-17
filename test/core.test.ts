@@ -228,6 +228,17 @@ e     r e
 |         
 r`);
         });
+
+        test('Print abcd, efcd', () => {
+            const _trie = trie(['abcd', 'efcd']);
+            expect(_trie.printTrie()).toEqual(`a e 
+| | 
+b f 
+| | 
+c c 
+| | 
+d d`);
+        });
     });
 });
 

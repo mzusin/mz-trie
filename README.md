@@ -30,7 +30,7 @@ export interface ITrie {
     getLeavesCount: (node?: INode) => number;
     getHeight: (node?: INode) => number;
     printTrie: () => string;
-    logTree: () => string;
+    log: () => string;
     getWords: () => string[];
 }
 
@@ -47,7 +47,7 @@ console.log(_trie.search('orange')); // true or false
 _trie.insert('potato');
 _trie.remove('potato');
 
-console.log(_trie.logTree());
+console.log(_trie.log());
 console.log(_trie.getWords()); // ['orange', 'apple']
 console.log(_trie.printTrie());
 ```

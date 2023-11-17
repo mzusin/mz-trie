@@ -12,7 +12,7 @@ declare module 'mz-trie' {
         getLeavesCount: (node?: INode) => number;
         getHeight: (node?: INode) => number;
         printTrie: () => string;
-        logTree: () => string;
+        log: () => string;
         getWords: () => string[];
     }
 

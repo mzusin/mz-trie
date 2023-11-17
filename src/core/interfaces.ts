@@ -13,6 +13,6 @@ export interface ITrie {
     getHeight: (node?: INode) => number;
 
     printTrie: () => string;
-    logTree: () => string;
+    log: () => string;
     getWords: () => string[];
 }

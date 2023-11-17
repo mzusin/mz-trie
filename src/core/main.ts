@@ -89,7 +89,7 @@ export const trie = (keys?: string[]) : ITrie => {
         return node?.children.size <= 0;
     };
 
-    const logTree = () => {
+    const log = () => {
         return JSON.stringify(root, (_key, value) => {
             if(value instanceof Map) {
                 return [...value];
@@ -246,7 +246,7 @@ export const trie = (keys?: string[]) : ITrie => {
         getLeavesCount,
         getHeight,
 
-        logTree,
+        log,
         getWords,
         printTrie,
     };

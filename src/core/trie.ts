@@ -7,6 +7,8 @@ export const trie = (keys?: string[]) : ITrie => {
         isEndOfWord: false,
     };
 
+    // --------- ACTIONS --------------------------
+
     /**
      * Every character of the input key is inserted as an individual Trie node.
      * Time Complexity: O(key_length)
@@ -84,19 +86,30 @@ export const trie = (keys?: string[]) : ITrie => {
         return node.isEndOfWord;
     };
 
+    const longestCommonPrefix = () : string => {
+        let node = root;
+        let longestPrefix = '';
+
+        while(node.children.size === 1) {
+
+            // [ [ 'a', { children: [Map], isEndOfWord: true } ] ]
+            const arr = Array.from(node.children);
+            const child: INode = arr[0][1];
+
+            longestPrefix += arr[0][0]; // arr[0][0] === letter
+
+            if(child.isEndOfWord) break;
+            node = child;
+        }
+
+        return longestPrefix;
+    };
+
+    // --------- GET INFO ------------------------
+
     const isEmpty = (node?: INode) : boolean => {
         node = node || root;
         return node?.children.size <= 0;
-    };
-
-    const log = () => {
-        return JSON.stringify(root, (_key, value) => {
-            if(value instanceof Map) {
-                return [...value];
-            }
-
-            return value;
-        }, 4);
     };
 
     const getWords = () : string[] => {
@@ -154,6 +167,18 @@ export const trie = (keys?: string[]) : ITrie => {
         traverse(node ?? root, 0);
 
         return maxLevel;
+    };
+
+    // --------- LOG ----------------------------
+
+    const log = () => {
+        return JSON.stringify(root, (_key, value) => {
+            if(value instanceof Map) {
+                return [...value];
+            }
+
+            return value;
+        }, 4);
     };
 
     const printTrie = () : string => {
@@ -226,9 +251,8 @@ export const trie = (keys?: string[]) : ITrie => {
         return tree.trim();
     };
 
-    /**
-     * Entry point
-     */
+    // --------- ENTRY POINT ----------------------------
+
     (() => {
         if(!keys) return;
 
@@ -241,13 +265,14 @@ export const trie = (keys?: string[]) : ITrie => {
         insert,
         remove,
         search,
-        isEmpty,
+        longestCommonPrefix,
 
+        isEmpty,
         getLeavesCount,
         getHeight,
+        getWords,
 
         log,
-        getWords,
         printTrie,
     };
 };

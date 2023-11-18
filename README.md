@@ -51,6 +51,7 @@ _trie.remove('potato');
 console.log(_trie.log());
 console.log(_trie.getWords()); // ['orange', 'apple']
 console.log(_trie.printTrie());
+console.log(_trie.longestCommonPrefix());
 ```
 
 ### Suffix Tree

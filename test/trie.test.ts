@@ -1,4 +1,4 @@
-import { trie } from '../src/core/suffix-tree';
+import { trie } from '../src/core/trie';
 
 describe('Trie', () => {
 
@@ -238,6 +238,24 @@ b f
 c c 
 | | 
 d d`);
+        });
+    });
+
+    describe('Longest common prefix', () => {
+
+        test('Longest common prefix 1', () => {
+            const _trie = trie(['flower', 'flow', 'flight']);
+            expect(_trie.longestCommonPrefix()).toEqual('fl');
+        });
+
+        test('Longest common prefix 1', () => {
+            const _trie = trie(['dog', 'racecar', 'car']);
+            expect(_trie.longestCommonPrefix()).toEqual('');
+        });
+
+        test('Longest common prefix 3', () => {
+            const _trie = trie(['ab', 'a']);
+            expect(_trie.longestCommonPrefix()).toEqual('a');
         });
     });
 });

@@ -38,7 +38,7 @@ export const trie: (keys?: string[]) => ITrie;
 export const suffixTree: (text: string) => ITrie;
 ```
 
-## Documentation
+### Documentation
 
 ```ts
 const _trie = trie(['orange', 'apple']);
@@ -53,7 +53,7 @@ console.log(_trie.getWords()); // ['orange', 'apple']
 console.log(_trie.printTrie());
 ```
 
-**Suffix Tree**
+### Suffix Tree
 
 ```ts
 const st = suffixTree('banana');
@@ -65,5 +65,12 @@ console.log(st.search('ana')); // true
 console.log(st.search('na')); // true
 console.log(st.search('a')); // true
 ```
+
+**Suffix tree usage**
+
+- Pattern Searching
+- Finding the longest repeated substring
+- Finding the longest common substring
+- Finding the longest palindrome in a string 
 
 

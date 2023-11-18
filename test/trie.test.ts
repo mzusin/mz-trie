@@ -1,4 +1,4 @@
-import { trie } from '../src/core/main';
+import { trie } from '../src/core/suffix-tree';
 
 describe('Trie', () => {
 

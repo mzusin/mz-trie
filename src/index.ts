@@ -1,7 +1,9 @@
-import { trie } from './core/main';
+import { trie } from './core/trie';
+import { suffixTree } from './core/suffix-tree';
 
 const api = {
     ...trie,
+    ...suffixTree,
 };
 
 declare global {
@@ -12,4 +14,5 @@ declare global {
 
 window.mzTrie = window.mzTrie || api;
 
-export * from './core/main';
+export * from './core/trie';
+export * from './core/suffix-tree';

@@ -17,4 +17,5 @@ declare module 'mz-trie' {
     }
 
     export const trie: (keys?: string[]) => ITrie;
+    export const suffixTree: (text: string) => ITrie;
 }

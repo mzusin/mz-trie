@@ -35,6 +35,7 @@ export interface ITrie {
 }
 
 export const trie: (keys?: string[]) => ITrie;
+export const suffixTree: (text: string) => ITrie;
 ```
 
 ## Documentation
@@ -50,6 +51,19 @@ _trie.remove('potato');
 console.log(_trie.log());
 console.log(_trie.getWords()); // ['orange', 'apple']
 console.log(_trie.printTrie());
+```
+
+**Suffix Tree**
+
+```ts
+const st = suffixTree('banana');
+console.log(st.search('apple')); // false
+console.log(st.search('banana')); // true
+console.log(st.search('anana')); // true
+console.log(st.search('nana')); // true
+console.log(st.search('ana')); // true
+console.log(st.search('na')); // true
+console.log(st.search('a')); // true
 ```
 
 
